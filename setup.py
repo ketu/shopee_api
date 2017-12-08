@@ -9,15 +9,15 @@ with open(path.join(current_path, 'README.rst'), encoding='utf-8') as f:
 
 
 setup(
-    name='flash_validator',
+    name='shopee_api',
     version='1.0.0',
-    description='simple python data validation',
+    description='simple python shopee partner api client',
     long_description=long_description,
-    url='https://github.com/ketu/flash_validator',
+    url='https://github.com/ketu/shopee_api',
     author='ketu.lai',
     author_email='ketu.lai@gmail.com',
     license='MIT',
-    keywords='python data validation',
+    keywords='shopee api',
     packages= find_packages(),
     install_requires=[],
     tests_require=[],
