@@ -4,7 +4,7 @@ import time
 import json
 import hmac, hashlib
 from urllib.parse import urljoin
-from requests import Request, Session
+from requests import Request, Session, exceptions
 from .order import Order
 from .product import Product
 from .variation import Variation
@@ -75,7 +75,7 @@ class Client(object, metaclass=ClientMeta):
             "Authorization":authorization
         }
         req = Request(method, url, headers=headers)
-        print(url)
+
         if body:
             if req.method in ["POST", "PUT", "PATH"]:
                 req.json = body
@@ -91,12 +91,19 @@ class Client(object, metaclass=ClientMeta):
         prepped = req.prepare()
         s = Session()
         resp = s.send(prepped)
+        resp = self.build_response(resp)
         return resp
+
+    def build_response(self, resp):
+        body = json.loads(resp.text)
+        if "error" not in body:
+            return body
+        else:
+            raise ValueError(body["error"])
 
     def get_cached_module(self, key):
         cached_module = self.cached_module.get(key)
-        print(key)
-        print(cached_module)
+
         if not cached_module:
             installed = self.installed_module.get(key)
             if not installed:

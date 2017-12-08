@@ -12,12 +12,11 @@ class TestOrder(TestCase):
 
     def test_shopee_get_order_by_status(self):
         client = self.get_client()
-        resp = client.order.get_order_by_status(order_status="CANCELLED")
+        try:
+            resp = client.order.get_order_by_status(order_status="CANCELLED")
+        except Exception as e:
+            print(e)
 
-        body = json.loads(resp.text)
-
-        for o in body["orders"]:
-            print("%s : %s"% (o["ordersn"], o["order_status"]))
 
 
     def test_shopee_get_order_detail(self):
