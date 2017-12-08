@@ -1,0 +1,1 @@
+### a simple Python Shopee partner api client
