@@ -7,7 +7,7 @@ import json
 class TestOrder(TestCase):
 
     def get_client(self):
-        client = shopee.Client(8526804, 10007, "80fb2727b950aa3e754cd8f7f9d2716cc056f00f1e8cd334c9fc61746bb2d4b1")
+        client = shopee.Client(18798193, 10392, "37aefdf56975b8840b7a4d92438a4c76f49c6f5e318a02b55090552d7798e550")
         return client
 
     def test_shopee_get_order_by_status(self):
@@ -43,7 +43,7 @@ class TestOrder(TestCase):
         # for o in ordersn_list:
         #     resp = client.order.get_order_escrow_detail(ordersn=o)
         #     print(resp)
-        resp = client.order.get_order_detail(ordersn_list = ["17120501004SGEF"])
+        resp = client.order.get_order_detail(ordersn_list = ["17111309443QQXA"])
         print(resp)
         #
         #
