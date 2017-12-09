@@ -7,13 +7,13 @@ import json
 class TestOrder(TestCase):
 
     def get_client(self):
-        client = shopee.Client(34535, 345554, "343")
+        client = shopee.Client(8526804, 10007, "80fb2727b950aa3e754cd8f7f9d2716cc056f00f1e8cd334c9fc61746bb2d4b1")
         return client
 
     def test_shopee_get_order_by_status(self):
         client = self.get_client()
         try:
-            resp = client.order.get_order_by_status(order_status="CANCELLED")
+            resp = client.order.get_order_by_status(order_status="READY_TO_SHIP")
         except Exception as e:
             print(e)
 
@@ -30,25 +30,27 @@ class TestOrder(TestCase):
         #17112917104CHF4
         #17112715084T7MG
 
-        ordersn_list = [
-            "17113023414VVJF", "171128143941R5V",
-            "17112917104CHF4", "17112715084T7MG",
-            "17111418244FMFA", "17120213344PUUQ",
-            "17120501004SGEF", "17120316264UJNX"
-        ]
-
-        resp = client.logistic.get_tracking_no(ordersn_list=ordersn_list)
-
-        body = json.loads(resp.text)
-        print(body)
-
-        for o in ordersn_list:
-            resp = client.order.get_order_escrow_detail(ordersn=o)
-            body = json.loads(resp.text)
-            print(body)
-        resp = client.order.get_order_detail(ordersn_list = ordersn_list)
-
-        body = json.loads(resp.text)
-
-        for o in body["orders"]:
-            print(o)
+        # ordersn_list = [
+        #     "171209092707FHK",
+        #
+        # ]
+        #
+        # resp = client.logistic.get_tracking_no(ordersn_list=ordersn_list)
+        #
+        #
+        # print(resp)
+        #
+        # for o in ordersn_list:
+        #     resp = client.order.get_order_escrow_detail(ordersn=o)
+        #     print(resp)
+        resp = client.order.get_order_detail(ordersn_list = ["17120501004SGEF"])
+        print(resp)
+        #
+        #
+        # #PH174660492724H
+        # resp = client.logistic.get_parameter_for_init(ordersn = "171209085506N5D")
+        # print(resp)
+        # b = {'dropoff': [], "ordersn": "171209085506N5D"}
+        #PH175869963295V  //PH175869963295V
+        #resp = client.logistic.init(ordersn="171209085506N5D", dropoff={})
+        #print(resp)

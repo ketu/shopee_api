@@ -83,7 +83,9 @@ class Logistic(BaseModule):
     def init(self, **kwargs):
         """
         Use this call to arrange Pickup or Dropoff. Should call shopee.logistics.GetParameterForInit to fetch all required param first.
-
+        pickup = {}
+        dropoff = {}
+        non_integrated = {}
         :param kwargs:
         :return:
         """

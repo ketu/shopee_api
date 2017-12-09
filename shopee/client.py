@@ -85,8 +85,10 @@ class Client(object, metaclass=ClientMeta):
 
     def execute(self, uri, method, body=None):
         parameter = self.make_default_parameter()
+
         if body is not None:
             parameter.update(body)
+
         req = self.build_request(uri, method, parameter)
         prepped = req.prepare()
         s = Session()
@@ -95,11 +97,12 @@ class Client(object, metaclass=ClientMeta):
         return resp
 
     def build_response(self, resp):
+
         body = json.loads(resp.text)
         if "error" not in body:
             return body
         else:
-            raise ValueError(body["error"])
+            raise AttributeError(body["error"])
 
     def get_cached_module(self, key):
         cached_module = self.cached_module.get(key)
