@@ -105,15 +105,13 @@ class Client(object, metaclass=ClientMeta):
             raise AttributeError(body["error"])
 
     def get_cached_module(self, key):
-        cache_key = self.partner_id + key
-
-        cached_module = self.cached_module.get(cache_key)
+        cached_module = self.cached_module.get(key)
 
         if not cached_module:
             installed = self.installed_module.get(key)
             if not installed:
                 return None
             cached_module = installed(self)
-            self.cached_module.setdefault(cache_key, cached_module)
+            self.cached_module.setdefault(key, cached_module)
         return cached_module
 

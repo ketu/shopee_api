@@ -1,0 +1,16 @@
+README.rst
+setup.py
+shopee/__init__.py
+shopee/base.py
+shopee/category.py
+shopee/client.py
+shopee/logistic.py
+shopee/order.py
+shopee/product.py
+shopee/rma.py
+shopee/setting.py
+shopee/variation.py
+shopee_api.egg-info/PKG-INFO
+shopee_api.egg-info/SOURCES.txt
+shopee_api.egg-info/dependency_links.txt
+shopee_api.egg-info/top_level.txt
