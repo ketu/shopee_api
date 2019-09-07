@@ -8,12 +8,8 @@ import random
 class TestProduct(TestCase):
 
     def get_client(self):
-        client = shopee.Client(234, 234, "234")
+        client = shopee.Client(564, 456, "45654645")
         return client
-    def test_shopee_get_item_list(self):
-        client = self.get_client()
-        resp = client.item.get_item_list(pagination_offset=0, pagination_entries_per_page=10)
-        print(resp)
 
     def test_shopee_get_item_detail(self):
         client = self.get_client()
