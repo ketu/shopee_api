@@ -7,6 +7,7 @@ from urllib.parse import urljoin
 from requests import Request, Session, exceptions
 from .order import Order
 from .product import Product
+from .item import Item
 from .variation import Variation
 from .logistic import Logistic
 from .rma import RMA
@@ -16,7 +17,8 @@ from .setting import BASE_URL
 # installed sub-module
 installed_module = {
     "order": Order,
-    "product": Product,
+    "product": Product,  # will be removed
+    "item": Item,
     "variation": Variation,
     "logistic": Logistic,
     "rma": RMA,
@@ -26,7 +28,7 @@ installed_module = {
 
 class ClientMeta(type):
     def __new__(mcs, name, bases, dct):
-        klass = super(ClientMeta, mcs).__new__(mcs, name, bases, dct)
+        klass = super().__new__(mcs, name, bases, dct)
         setattr(
             klass, "installed_module",
             installed_module
@@ -38,7 +40,7 @@ class Client(object, metaclass=ClientMeta):
     __metaclass__ = ClientMeta
     cached_module = {}
 
-    def __init__(self, shop_id, partner_id, secret_key):
+    def __init__(self, shop_id: int, partner_id: int, secret_key: str):
         self.shop_id = shop_id
         self.partner_id = partner_id
         self.secret_key = secret_key
@@ -72,7 +74,7 @@ class Client(object, metaclass=ClientMeta):
         url = urljoin(BASE_URL, uri)
         authorization = self.sign(url, body)
         headers = {
-            "Authorization":authorization
+            "Authorization": authorization
         }
         req = Request(method, url, headers=headers)
 
@@ -105,7 +107,7 @@ class Client(object, metaclass=ClientMeta):
             raise AttributeError(body["error"])
 
     def get_cached_module(self, key):
-        cache_key = self.partner_id + key
+        cache_key = str(self.partner_id) + key
 
         cached_module = self.cached_module.get(cache_key)
 
@@ -116,4 +118,3 @@ class Client(object, metaclass=ClientMeta):
             cached_module = installed(self)
             self.cached_module.setdefault(cache_key, cached_module)
         return cached_module
-

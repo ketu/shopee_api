@@ -3,7 +3,7 @@
 from .base import BaseModule
 
 
-class Product(BaseModule):
+class Item(BaseModule):
 
     def add(self, product_data):
         """
