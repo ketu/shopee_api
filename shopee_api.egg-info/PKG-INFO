@@ -1,0 +1,12 @@
+Metadata-Version: 1.2
+Name: shopee-api
+Version: 1.0.2
+Summary: simple python shopee partner api client
+Home-page: https://github.com/ketu/shopee_api
+Author: ketu.lai
+Author-email: ketu.lai@gmail.com
+License: MIT
+Description: a simple Python Shopee partner api client
+Keywords: shopee api
+Platform: UNKNOWN
+Requires-Python: >=3.6
