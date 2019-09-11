@@ -99,12 +99,10 @@ class Client(object, metaclass=ClientMeta):
         return resp
 
     def build_response(self, resp):
-
-        body = json.loads(resp.text)
-        if "error" not in body:
-            return body
-        else:
-            raise AttributeError(body["error"])
+        try:
+            return resp.json()
+        except (ValueError, json.JSONDecodeError) as e:
+            raise resp.raise_for_status()
 
     def get_cached_module(self, key):
         cache_key = str(self.partner_id) + key
